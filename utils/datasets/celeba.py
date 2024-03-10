@@ -68,7 +68,7 @@ class CelebADataset(Dataset):
                     values = re.split(' +', line)
                     filename = values[0]
                     self.filenames.append(filename)
-                    self.annotations.append([int(v) for v in values[1:]])
+                    self.annotations.append([int(int(v) > 0) for v in values[1:]])
                     
         self.annotations = np.array(self.annotations)    
               
@@ -86,5 +86,5 @@ class CelebADataset(Dataset):
         if self.transform:
             img = self.transform(img)
         return img, {'filename': img_name, 'idx': idx,
-                     'attributes': torch.tensor(img_attributes).long()[:, self.chosen_idx]}
+                     'attributes': torch.tensor(img_attributes).long()[self.chosen_idx]}
     
