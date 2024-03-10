@@ -34,7 +34,7 @@ class CelebADataset(Dataset):
             # Path to download the dataset to
             download_path = f'{root_dir}/img_align_celeba.zip'
             # Download the dataset from google drive
-            gdown.download(download_url, download_path, quiet=False)
+            # gdown.download(download_url, download_path, quiet=False)
 
 #             os.makedirs(dataset_folder)
 
