@@ -59,7 +59,7 @@ class CelebADataset(Dataset):
                     if chosen_attrs is not None:
                         self.chosen_idx = []
                         temp_header = []
-                        for i, item in self.header:
+                        for i, item in enumerate(self.header):
                             if item in chosen_attrs:
                                 self.chosen_idx.append(i)
                                 temp_header.append(item)
@@ -85,5 +85,6 @@ class CelebADataset(Dataset):
         # Apply transformations to the image
         if self.transform:
             img = self.transform(img)
-        return img, {'filename': img_name, 'idx': idx, 'attributes': torch.tensor(img_attributes).long()}
+        return img, {'filename': img_name, 'idx': idx,
+                     'attributes': torch.tensor(img_attributes).long()[:, self.chosen_idx]}
     
